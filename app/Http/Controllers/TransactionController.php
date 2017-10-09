@@ -8,17 +8,17 @@ use App\Repositories\Transactions\TransactionsRepository;
 
 class TransactionController extends Controller
 {
-	protected $transactions_repository;
+	protected $transactionsRepository;
 
-	public function __construct(TransactionsRepository $transactions_repository) {
-		$this->transactions_repository = $transactions_repository;
+	public function __construct(TransactionsRepository $transactionsRepository) {
+		$this->transactionsRepository = $transactionsRepository;
 	}
 
 	public function verify($token){
-		$transaction = $this->transactions_repository->getByToken($token);
+		$transaction = $this->transactionsRepository->getByToken($token);
 		throw_unless($transaction, TransferConfirmException::class);
-		$this->transactions_repository->ConfirmTransaction($transaction);
+		$this->transactionsRepository->ConfirmTransaction($transaction);
 		ExecuteTransaction::dispatch($transaction);
-		return response()->view('confirm_success');
+		return view('confirm_success');
     }
 }

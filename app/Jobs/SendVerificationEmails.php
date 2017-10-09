@@ -33,8 +33,9 @@ class SendVerificationEmails implements ShouldQueue
      */
     public function handle()
     {
-	    if (!$this->transaction->approved){
-		    Mail::to($this->transaction->fromUser)->queue(new VerifyTransfer($this->transaction));
-	    }
+	    if ($this->transaction->approved) return;
+
+	    Mail::to($this->transaction->fromUser)->queue(new VerifyTransfer($this->transaction));
+
     }
 }

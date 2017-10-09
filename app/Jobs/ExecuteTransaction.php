@@ -33,10 +33,8 @@ class ExecuteTransaction implements ShouldQueue
      * @param $transactions_repository TransactionsRepository
      * @return void
      */
-    public function handle(TransactionsRepository $transactions_repository)
+    public function handle(TransactionsRepository $transactionsRepository)
     {
-	    if ($this->transaction->completed) return;
-
-    	$transactions_repository->ExecuteTransaction($this->transaction);
+    	$transactionsRepository->ExecuteTransaction($this->transaction);
     }
 }

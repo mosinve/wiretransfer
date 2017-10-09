@@ -27,19 +27,19 @@ class TransferBalance extends Command
      */
     protected $description = 'Transfers specified sum between users';
 
-    protected $transactions_repository;
+    protected $transactionsRepository;
 
-    protected $users_repository;
+    protected $usersRepository;
     /**
      * Create a new command instance.
      *
      * @param $transactions_repository TransactionsRepository
      *
      */
-    public function __construct(TransactionsRepository $transactions_repository, UsersRepository $users_repository)
+    public function __construct(TransactionsRepository $transactionsRepository, UsersRepository $usersRepository)
     {
-    	$this->transactions_repository = $transactions_repository;
-    	$this->users_repository = $users_repository;
+    	$this->transactions_repository = $transactionsRepository;
+    	$this->users_repository = $usersRepository;
         parent::__construct();
     }
 
@@ -53,8 +53,8 @@ class TransferBalance extends Command
         $user_to = $this->option('to');
         $sum = $this->option('sum');
 
-        CreateTransaction::dispatch($this->users_repository->getByID($user_from), $this->users_repository->getByID($user_to), $sum, true);
-        $this->transactions_repository->getAll()->each(function ($transaction){
+        CreateTransaction::dispatch($this->usersRepository->getByID($user_from), $this->usersRepository->getByID($user_to), $sum, true);
+        $this->transactionsRepository->getAll()->each(function ($transaction){
         	ExecuteTransaction::dispatch($transaction);
         });
     }

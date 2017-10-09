@@ -12,8 +12,8 @@ class TransferConfirmException extends Exception
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function render($request)
+    public function render()
     {
-       return response()->view('confirm_failed');
+       return view('confirm_failed');
     }
 }

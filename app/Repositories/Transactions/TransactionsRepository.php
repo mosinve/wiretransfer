@@ -54,14 +54,13 @@
 
 		/**
 		 * @param Transaction $transaction
-		 * @return boolean
 		 */
 		public function ConfirmTransaction( Transaction $transaction ) {
-			if ($transaction->approved) return false;
+			if ($transaction->approved) return;
+
 			$transaction->approved = true;
 			$transaction->pincode = '';
 			$transaction->save();
-			return true;
 		}
 
 		public function getByToken($token){

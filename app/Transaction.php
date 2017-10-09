@@ -19,4 +19,8 @@ class Transaction extends Model
 	public function scopeNotFinished($query){
 		return $query->where('completed', 0);
 	}
+
+	public function scopeNotApproved($query){
+	    return $query->where('approved', 0);
+    }
 }

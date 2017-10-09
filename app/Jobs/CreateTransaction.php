@@ -39,9 +39,9 @@ class CreateTransaction implements ShouldQueue
      * Execute the job.
      * @param $transactions_repository TransactionsRepository
      */
-    public function handle(TransactionsRepository $transactions_repository)
+    public function handle(TransactionsRepository $transactionsRepository)
     {
-    	$transaction = $transactions_repository->CreateTransaction($this->user_from, $this->user_to, $this->sum, $this->approved);
+    	$transaction = $transactionsRepository->CreateTransaction($this->user_from, $this->user_to, $this->sum, $this->approved);
     	SendVerificationEmails::dispatch($transaction);
     }
 }
